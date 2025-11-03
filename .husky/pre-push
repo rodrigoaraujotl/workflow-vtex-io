@@ -1,0 +1,84 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+echo "🚀 Running pre-push hooks..."
+
+# Get the current branch
+current_branch=$(git rev-parse --abbrev-ref HEAD)
+echo "📋 Current branch: $current_branch"
+
+# Run full test suite
+echo "🧪 Running full test suite..."
+npm run test
+
+# Run linting
+echo "🔍 Running linting..."
+npm run lint
+
+# Run formatting check
+echo "💅 Checking code formatting..."
+npm run format:check
+
+# Build the project
+echo "🔨 Building project..."
+npm run build
+
+# Run security audit
+echo "🔒 Running security audit..."
+npm audit --audit-level moderate
+
+# Check for secrets in code
+echo "🕵️ Scanning for secrets..."
+if command -v gitleaks &> /dev/null; then
+    gitleaks detect --source . --verbose
+else
+    echo "⚠️ GitLeaks not installed, skipping secret scan"
+fi
+
+# Branch-specific checks
+if [ "$current_branch" = "main" ] || [ "$current_branch" = "master" ]; then
+    echo "🚨 Pushing to main branch - running additional checks..."
+    
+    # Ensure all tests pass with coverage
+    echo "📊 Running tests with coverage..."
+    npm run test:coverage
+    
+    # Check if version has been bumped
+    echo "🏷️ Checking version bump..."
+    if git diff HEAD~1 package.json | grep -q '"version"'; then
+        echo "✅ Version has been updated"
+    else
+        echo "⚠️ Warning: Version may need to be updated for main branch"
+    fi
+fi
+
+if [ "$current_branch" = "develop" ]; then
+    echo "🧪 Pushing to develop branch - running integration checks..."
+    
+    # Run integration tests if available
+    if npm run | grep -q "test:integration"; then
+        echo "🔗 Running integration tests..."
+        npm run test:integration
+    fi
+fi
+
+# Check commit message format (conventional commits)
+echo "📝 Validating commit messages..."
+if command -v commitlint &> /dev/null; then
+    npx commitlint --from HEAD~1 --to HEAD --verbose
+else
+    echo "⚠️ Commitlint not configured, skipping commit message validation"
+fi
+
+# Check for TODO/FIXME comments in production branches
+if [ "$current_branch" = "main" ] || [ "$current_branch" = "master" ]; then
+    echo "🔍 Checking for TODO/FIXME comments..."
+    todo_count=$(grep -r "TODO\|FIXME" src/ --exclude-dir=node_modules || true | wc -l)
+    if [ "$todo_count" -gt 0 ]; then
+        echo "⚠️ Warning: Found $todo_count TODO/FIXME comments in source code"
+        grep -r "TODO\|FIXME" src/ --exclude-dir=node_modules || true
+    fi
+fi
+
+echo "✅ Pre-push checks completed successfully!"
+echo "🎉 Ready to push to $current_branch"

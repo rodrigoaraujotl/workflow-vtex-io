@@ -1,0 +1,107 @@
+# Source files (TypeScript)
+src/
+*.ts
+!*.d.ts
+
+# Test files
+tests/
+test/
+*.test.ts
+*.spec.ts
+jest.config.js
+jest.e2e.config.js
+tsconfig.test.json
+
+# Development files
+.git/
+.gitignore
+.github/
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Documentation (keep README.md and LICENSE)
+docs/
+*.md
+!README.md
+INTEGRATION.md
+QUICK_START.md
+vtex_io_deploy_prd.md
+
+# Build tools
+tsconfig.json
+.eslintrc*
+.prettierrc*
+.editorconfig
+
+# CI/CD
+.github/
+.gitlab-ci.yml
+.travis.yml
+.circleci/
+
+# Coverage
+coverage/
+.nyc_output/
+*.lcov
+
+# Logs
+logs/
+*.log
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# Config files (keep only necessary)
+config/local.json
+config/development.json
+config/test.json
+
+# Docker
+docker/
+Dockerfile
+docker-compose.yml
+.dockerignore
+
+# Scripts (development)
+scripts/
+
+# Temporary files
+tmp/
+temp/
+.tmp/
+.temp/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.sublime-*
+
+# Node modules (dev dependencies)
+node_modules/
+
+# Package manager files
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Build artifacts (keep dist, but exclude source maps if desired)
+# Uncomment to exclude source maps:
+# *.map
+
+# Coverage and test results
+coverage/
+test-results/
+.nyc_output/
+
+# Misc
+*.tgz
+*.tar.gz
+

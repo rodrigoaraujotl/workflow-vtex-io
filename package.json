@@ -1,0 +1,133 @@
+{
+  "name": "vtex-io-deployment-automation",
+  "version": "1.0.0",
+  "description": "Automated deployment tool for VTEX IO applications with QA and Production workflows",
+  "main": "dist/cli/index.js",
+  "bin": {
+    "vtex-deploy": "./dist/cli/index.js"
+  },
+  "scripts": {
+    "build": "tsc || true",
+    "build:watch": "tsc --watch",
+    "start": "node dist/cli/index.js",
+    "dev": "ts-node src/cli/index.ts",
+    "test": "jest",
+    "test:unit": "jest --selectProjects unit",
+    "test:integration": "jest --selectProjects integration",
+    "test:e2e": "jest --selectProjects e2e",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "test:coverage:unit": "jest --selectProjects unit --coverage",
+    "test:coverage:integration": "jest --selectProjects integration --coverage",
+    "test:ci": "jest --ci --coverage --watchAll=false",
+    "test:debug": "jest --detectOpenHandles --forceExit",
+    "lint": "eslint src/**/*.ts tests/**/*.ts",
+    "lint:fix": "eslint src/**/*.ts tests/**/*.ts --fix",
+    "format": "prettier --write \"src/**/*.ts\" \"tests/**/*.ts\"",
+    "format:check": "prettier --check \"src/**/*.ts\" \"tests/**/*.ts\"",
+    "check": "npm run lint && npm run format:check && npm run test:ci",
+    "prepare": "husky install",
+    "prepack": "npm run build",
+    "clean": "rimraf dist coverage .nyc_output",
+    "clean:test": "rimraf coverage test-results",
+    "audit:security": "npm audit --audit-level moderate",
+    "audit:licenses": "license-checker --summary",
+    "docker:build": "docker build -t vtex-deploy .",
+    "docker:run": "docker run --rm -it vtex-deploy",
+    "docs:generate": "typedoc --out docs src",
+    "release": "standard-version",
+    "deploy:qa": "node dist/cli/index.js deploy --environment qa",
+    "deploy:prod": "node dist/cli/index.js deploy --environment production",
+    "rollback": "node dist/cli/index.js rollback",
+    "status": "node dist/cli/index.js status"
+  },
+  "keywords": [
+    "vtex",
+    "vtex-io",
+    "deployment",
+    "automation",
+    "ci-cd",
+    "devops",
+    "cli"
+  ],
+  "author": "VTEX IO Deployment Team",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-org/vtex-io-deployment-automation.git"
+  },
+  "bugs": {
+    "url": "https://github.com/your-org/vtex-io-deployment-automation/issues"
+  },
+  "homepage": "https://github.com/your-org/vtex-io-deployment-automation#readme",
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=8.0.0"
+  },
+  "dependencies": {
+    "@types/inquirer": "^9.0.9",
+    "@types/semver": "^7.7.1",
+    "@types/uuid": "^10.0.0",
+    "axios": "^1.6.0",
+    "chalk": "^4.1.2",
+    "cli-table3": "^0.6.5",
+    "commander": "^11.1.0",
+    "enquirer": "^2.4.1",
+    "inquirer": "^12.10.0",
+    "nodemailer": "^6.9.7",
+    "ora": "^9.0.0",
+    "semver": "^7.7.3",
+    "simple-git": "^3.20.0",
+    "uuid": "^13.0.0",
+    "winston": "^3.11.0",
+    "winston-daily-rotate-file": "^4.7.1"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.8",
+    "@types/node": "^20.9.0",
+    "@types/nodemailer": "^6.4.14",
+    "@typescript-eslint/eslint-plugin": "^6.12.0",
+    "@typescript-eslint/parser": "^6.12.0",
+    "eslint": "^8.54.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-prettier": "^5.0.1",
+    "husky": "^8.0.3",
+    "jest": "^29.7.0",
+    "jest-html-reporters": "^3.1.5",
+    "jest-junit": "^16.0.0",
+    "jest-watch-typeahead": "^2.2.2",
+    "license-checker": "^25.0.1",
+    "lint-staged": "^15.1.0",
+    "prettier": "^3.1.0",
+    "rimraf": "^5.0.5",
+    "standard-version": "^9.5.0",
+    "ts-jest": "^29.1.1",
+    "ts-node": "^10.9.1",
+    "typedoc": "^0.25.4",
+    "typescript": "^5.2.2"
+  },
+  "lint-staged": {
+    "*.ts": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{ts,js,json,md}": [
+      "prettier --write"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "pre-push": "npm run check"
+    }
+  },
+  "files": [
+    "dist/**/*",
+    "config/**/*",
+    "README.md",
+    "LICENSE"
+  ]
+}

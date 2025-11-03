@@ -1,0 +1,56 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+echo "📝 Validating commit message..."
+
+# Read the commit message
+commit_message=$(cat "$1")
+
+# Check if commitlint is available
+if command -v commitlint &> /dev/null; then
+    npx commitlint --edit "$1"
+else
+    # Basic validation if commitlint is not available
+    echo "⚠️ Commitlint not found, performing basic validation..."
+    
+    # Check minimum length
+    if [ ${#commit_message} -lt 10 ]; then
+        echo "❌ Commit message too short (minimum 10 characters)"
+        echo "Current message: '$commit_message'"
+        exit 1
+    fi
+    
+    # Check for conventional commit format (basic)
+    if echo "$commit_message" | grep -qE "^(feat|fix|docs|style|refactor|test|chore|perf|ci|build|revert)(\(.+\))?: .+"; then
+        echo "✅ Commit message follows conventional format"
+    else
+        echo "⚠️ Warning: Commit message doesn't follow conventional format"
+        echo "Expected format: type(scope): description"
+        echo "Types: feat, fix, docs, style, refactor, test, chore, perf, ci, build, revert"
+        echo "Current message: '$commit_message'"
+        echo ""
+        echo "Examples:"
+        echo "  feat(auth): add user authentication"
+        echo "  fix(deploy): resolve deployment timeout issue"
+        echo "  docs: update README with installation steps"
+        echo ""
+        echo "Continue anyway? (y/N)"
+        read -r response
+        if [ "$response" != "y" ] && [ "$response" != "Y" ]; then
+            exit 1
+        fi
+    fi
+    
+    # Check for prohibited patterns
+    if echo "$commit_message" | grep -qiE "(wip|todo|fixme|hack|temp|debug)"; then
+        echo "⚠️ Warning: Commit message contains development keywords"
+        echo "Consider using a more descriptive message for production commits"
+    fi
+    
+    # Check for issue references (optional)
+    if echo "$commit_message" | grep -qE "#[0-9]+"; then
+        echo "🔗 Issue reference found in commit message"
+    fi
+fi
+
+echo "✅ Commit message validation completed!"

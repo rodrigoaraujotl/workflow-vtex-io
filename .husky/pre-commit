@@ -1,0 +1,21 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+echo "🔍 Running pre-commit hooks..."
+
+# Run lint-staged for staged files
+npx lint-staged
+
+# Check TypeScript compilation
+echo "🔧 Checking TypeScript compilation..."
+npx tsc --noEmit
+
+# Run unit tests for changed files
+echo "🧪 Running tests for changed files..."
+npm run test -- --passWithNoTests --findRelatedTests --bail
+
+# Security check for staged files
+echo "🔒 Running security checks..."
+npx audit-ci --config audit-ci.json
+
+echo "✅ Pre-commit checks completed successfully!"
