@@ -1,10 +1,10 @@
 # VTEX IO Deployment Automation Tool
 
-[![CI/CD Pipeline](https://github.com/your-org/vtex-deploy-automation/actions/workflows/ci.yml/badge.svg)](https://github.com/your-org/vtex-deploy-automation/actions/workflows/ci.yml)
-[![Security Scan](https://github.com/your-org/vtex-deploy-automation/actions/workflows/security.yml/badge.svg)](https://github.com/your-org/vtex-deploy-automation/actions/workflows/security.yml)
-[![codecov](https://codecov.io/gh/your-org/vtex-deploy-automation/branch/main/graph/badge.svg)](https://codecov.io/gh/your-org/vtex-deploy-automation)
+[![CI/CD Pipeline](https://github.com/rodrigoaraujotl/vtex-deploy-automation/actions/workflows/ci.yml/badge.svg)](https://github.com/rodrigoaraujotl/vtex-deploy-automation/actions/workflows/ci.yml)
+[![Security Scan](https://github.com/rodrigoaraujotl/vtex-deploy-automation/actions/workflows/security.yml/badge.svg)](https://github.com/rodrigoaraujotl/vtex-deploy-automation/actions/workflows/security.yml)
+[![codecov](https://codecov.io/gh/rodrigoaraujotl/vtex-deploy-automation/branch/main/graph/badge.svg)](https://codecov.io/gh/rodrigoaraujotl/vtex-deploy-automation)
 [![npm version](https://badge.fury.io/js/vtex-deploy-automation.svg)](https://badge.fury.io/js/vtex-deploy-automation)
-[![Docker Image](https://img.shields.io/docker/v/your-org/vtex-deploy-automation?label=docker)](https://hub.docker.com/r/your-org/vtex-deploy-automation)
+[![Docker Image](https://img.shields.io/docker/v/rodrigoaraujotl/vtex-deploy-automation?label=docker)](https://hub.docker.com/r/rodrigoaraujotl/vtex-deploy-automation)
 
 A comprehensive automation tool for VTEX IO application deployments with advanced validation, monitoring, and rollback capabilities.
 
@@ -61,10 +61,10 @@ npm install --save-dev vtex-deploy-automation
 ### Docker Installation
 ```bash
 # Pull the latest image
-docker pull your-org/vtex-deploy-automation:latest
+docker pull rodrigoaraujotl/vtex-deploy-automation:latest
 
 # Or build from source
-git clone https://github.com/your-org/vtex-deploy-automation.git
+git clone https://github.com/rodrigoaraujotl/vtex-deploy-automation.git
 cd vtex-deploy-automation
 docker build -t vtex-deploy-automation .
 ```
@@ -72,7 +72,7 @@ docker build -t vtex-deploy-automation .
 ### From Source
 ```bash
 # Clone the repository
-git clone https://github.com/your-org/vtex-deploy-automation.git
+git clone https://github.com/rodrigoaraujotl/vtex-deploy-automation.git
 cd vtex-deploy-automation
 
 # Install dependencies
@@ -98,7 +98,7 @@ VTEX_WORKSPACE_PROD=master
 VTEX_AUTH_TOKEN=your-auth-token
 
 # Git Configuration
-GIT_REPOSITORY_URL=https://github.com/your-org/your-vtex-app.git
+GIT_REPOSITORY_URL=https://github.com/rodrigoaraujotl/your-vtex-app.git
 GIT_BRANCH_QA=develop
 GIT_BRANCH_PROD=main
 
@@ -304,7 +304,7 @@ docker run -it --rm \
   -v $(pwd):/workspace \
   -v ~/.vtex:/root/.vtex \
   -e VTEX_ACCOUNT=your-account \
-  your-org/vtex-deploy-automation:latest \
+  rodrigoaraujotl/vtex-deploy-automation:latest \
   vtex-deploy qa
 
 # Using docker-compose
@@ -567,7 +567,7 @@ We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) f
 ### Development Setup
 ```bash
 # Clone the repository
-git clone https://github.com/your-org/vtex-deploy-automation.git
+git clone https://github.com/rodrigoaraujotl/vtex-deploy-automation.git
 cd vtex-deploy-automation
 
 # Install dependencies
@@ -596,10 +596,10 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 🆘 Support
 
 ### Getting Help
-- **Documentation**: [Full documentation](https://your-org.github.io/vtex-deploy-automation)
-- **Issues**: [GitHub Issues](https://github.com/your-org/vtex-deploy-automation/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/your-org/vtex-deploy-automation/discussions)
-- **Slack**: [#vtex-deploy-automation](https://your-org.slack.com/channels/vtex-deploy-automation)
+- **Documentation**: [Full documentation](https://rodrigoaraujotl.github.io/vtex-deploy-automation)
+- **Issues**: [GitHub Issues](https://github.com/rodrigoaraujotl/vtex-deploy-automation/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/rodrigoaraujotl/vtex-deploy-automation/discussions)
+- **Slack**: [#vtex-deploy-automation](https://rodrigoaraujotl.slack.com/channels/vtex-deploy-automation)
 
 ### Enterprise Support
 For enterprise support and custom implementations, contact: [enterprise@your-company.com](mailto:enterprise@your-company.com)
@@ -626,4 +626,4 @@ For enterprise support and custom implementations, contact: [enterprise@your-com
 
 **Made with ❤️ by the VTEX DevOps Team**
 
-For more information, visit our [website](https://your-company.com) or follow us on [Twitter](https://twitter.com/your-org).
+For more information, visit our [website](https://your-company.com) or follow us on [Twitter](https://twitter.com/rodrigoaraujotl).

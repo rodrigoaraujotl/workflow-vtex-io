@@ -332,6 +332,12 @@ export class ConfigManager {
         retentionDays: 30,
         maxFileSize: '10MB',
         maxFiles: 5
+      },
+      healthCheck: {
+        enabled: true,
+        interval: 30000,
+        timeout: 10000,
+        retries: 3
       }
     }
 

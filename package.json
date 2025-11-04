@@ -1,6 +1,6 @@
 {
   "name": "vtex-io-deployment-automation",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Automated deployment tool for VTEX IO applications with QA and Production workflows",
   "main": "dist/cli/index.js",
   "bin": {
@@ -54,12 +54,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/your-org/vtex-io-deployment-automation.git"
+    "url": "https://github.com/rodrigoaraujotl/vtex-io-deployment-automation.git"
   },
   "bugs": {
-    "url": "https://github.com/your-org/vtex-io-deployment-automation/issues"
+    "url": "https://github.com/rodrigoaraujotl/vtex-io-deployment-automation/issues"
   },
-  "homepage": "https://github.com/your-org/vtex-io-deployment-automation#readme",
+  "homepage": "https://github.com/rodrigoaraujotl/vtex-io-deployment-automation#readme",
   "publishConfig": {
     "access": "public"
   },
@@ -86,7 +86,7 @@
     "winston-daily-rotate-file": "^4.7.1"
   },
   "devDependencies": {
-    "@types/jest": "^29.5.8",
+    "@types/jest": "^29.5.14",
     "@types/node": "^20.9.0",
     "@types/nodemailer": "^6.4.14",
     "@typescript-eslint/eslint-plugin": "^6.12.0",
