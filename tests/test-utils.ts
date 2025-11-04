@@ -174,6 +174,63 @@ export function createMockConfig(): AppConfig {
       retentionDays: 30,
       maxFileSize: '10MB',
       maxFiles: 5
+    },
+    healthCheck: {
+      enabled: true,
+      interval: 30000,
+      timeout: 10000,
+      retries: 3
     }
+  }
+}
+
+/**
+ * Create default logging settings for testing
+ */
+export function createMockLoggingSettings(): LoggingSettings {
+  return {
+    level: 'info',
+    format: 'json',
+    auditEnabled: false,
+    retentionDays: 7,
+    maxFileSize: '10MB',
+    maxFiles: 5
+  }
+}
+
+/**
+ * Create mock deployment options for testing
+ */
+export function createMockDeploymentOptions(options: any = {}): any {
+  return {
+    environment: options.environment || 'qa',
+    branch: options.branch || 'develop',
+    workspace: options.workspace || 'qa-workspace',
+    force: options.force || false,
+    skipValidation: options.skipValidation || false,
+    skipTests: options.skipTests || false,
+    canary: options.canary || false,
+    ...options
+  }
+}
+
+/**
+ * Create mock deployment result for testing
+ */
+export function createMockDeploymentResult(options: any = {}): any {
+  return {
+    success: options.success !== undefined ? options.success : true,
+    id: options.id || `deploy-${Date.now()}`,
+    environment: options.environment || 'qa',
+    version: options.version || '1.0.0',
+    workspace: options.workspace || 'qa-workspace',
+    status: options.status || 'completed',
+    startTime: options.startTime || new Date(),
+    endTime: options.endTime || new Date(),
+    duration: options.duration || 1000,
+    logs: options.logs || [],
+    error: options.error || undefined,
+    canary: options.canary || false,
+    ...options
   }
 }

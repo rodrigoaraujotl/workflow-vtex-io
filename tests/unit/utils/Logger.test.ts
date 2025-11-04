@@ -3,6 +3,7 @@
  */
 
 import { Logger } from '@/utils/Logger'
+import { createMockLoggingSettings } from '@tests/test-utils'
 import fs from 'fs'
 import path from 'path'
 
@@ -42,7 +43,7 @@ describe('Logger', () => {
     }
 
     // Create Logger instance
-    logger = new Logger()
+    logger = new Logger(createMockLoggingSettings())
   })
 
   afterEach(() => {

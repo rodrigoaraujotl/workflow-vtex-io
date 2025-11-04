@@ -11,7 +11,8 @@ import {
   createMockDeploymentOptions,
   mockAsyncFunction,
   mockRejectedFunction,
-} from '@tests/setup'
+  createMockLoggingSettings,
+} from '@tests/test-utils'
 
 // Mock dependencies
 jest.mock('@/core/ConfigManager')
@@ -27,7 +28,7 @@ describe('VtexService', () => {
   beforeEach(() => {
     // Create mock instances
     mockConfig = new ConfigManager() as jest.Mocked<ConfigManager>
-    mockLogger = new Logger() as jest.Mocked<Logger>
+    mockLogger = new Logger(createMockLoggingSettings()) as jest.Mocked<Logger>
     mockExec = exec as jest.MockedFunction<typeof exec>
 
     // Setup mocks

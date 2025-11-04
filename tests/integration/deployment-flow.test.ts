@@ -15,6 +15,7 @@ import {
   cleanupTestEnvironment,
   waitFor
 } from '../helpers/test-helpers'
+import { createMockLoggingSettings } from '../test-utils'
 import path from 'path'
 import fs from 'fs'
 
@@ -32,7 +33,7 @@ describe('Deployment Flow Integration', () => {
     setupTestEnvironment()
 
     // Initialize real instances with mocked dependencies
-    logger = new Logger()
+    logger = new Logger(createMockLoggingSettings())
     configManager = new ConfigManager(logger)
     vtexClient = new VTEXClient(logger, configManager)
     gitOps = new GitOperations(logger)

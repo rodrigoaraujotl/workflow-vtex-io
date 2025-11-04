@@ -10,7 +10,8 @@ import {
   createMockConfig,
   mockAsyncFunction,
   mockRejectedFunction,
-} from '@tests/setup'
+  createMockLoggingSettings,
+} from '@tests/test-utils'
 
 // Mock dependencies
 jest.mock('@/core/ConfigManager')
@@ -26,7 +27,7 @@ describe('GitService', () => {
   beforeEach(() => {
     // Create mock instances
     mockConfig = new ConfigManager() as jest.Mocked<ConfigManager>
-    mockLogger = new Logger() as jest.Mocked<Logger>
+    mockLogger = new Logger(createMockLoggingSettings()) as jest.Mocked<Logger>
     mockGit = {
       status: jest.fn(),
       branch: jest.fn(),

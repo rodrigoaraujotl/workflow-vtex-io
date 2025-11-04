@@ -403,6 +403,9 @@ export class ConfigManager {
         retentionDays: 7,
         maxFileSize: '10MB',
         maxFiles: 5
+      },
+      healthCheck: {
+        
       }
     }
   }

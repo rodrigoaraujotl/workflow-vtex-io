@@ -7,7 +7,7 @@ import { ValidationService } from '@/core/ValidationService'
 import { GitService } from '@/core/GitService'
 import { VtexService } from '@/core/VtexService'
 import { Logger } from '@/utils/Logger'
-import { createMockConfig } from '@tests/setup'
+import { createMockConfig, createMockLoggingSettings } from '@tests/test-utils'
 import * as fs from 'fs'
 import * as path from 'path'
 
@@ -29,7 +29,7 @@ describe('Configuration Flow Integration', () => {
     
     // Create real instances
     configManager = new ConfigManager()
-    logger = new Logger()
+    logger = new Logger(createMockLoggingSettings())
     gitService = new GitService(configManager, logger)
     vtexService = new VtexService(configManager, logger)
     validationService = new ValidationService(configManager, gitService, vtexService, logger)

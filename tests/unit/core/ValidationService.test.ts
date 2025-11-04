@@ -12,7 +12,8 @@ import {
   createMockDeploymentOptions,
   mockAsyncFunction,
   mockRejectedFunction,
-} from '@tests/setup'
+  createMockLoggingSettings,
+} from '@tests/test-utils'
 
 // Mock dependencies
 jest.mock('@/core/ConfigManager')
@@ -32,7 +33,7 @@ describe('ValidationService', () => {
     mockConfig = new ConfigManager() as jest.Mocked<ConfigManager>
     mockGitService = new GitService(mockConfig) as jest.Mocked<GitService>
     mockVtexService = new VtexService(mockConfig) as jest.Mocked<VtexService>
-    mockLogger = new Logger() as jest.Mocked<Logger>
+    mockLogger = new Logger(createMockLoggingSettings()) as jest.Mocked<Logger>
 
     // Setup default mock implementations
     mockConfig.get = jest.fn().mockImplementation((key: string) => {

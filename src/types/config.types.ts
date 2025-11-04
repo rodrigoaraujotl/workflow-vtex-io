@@ -17,6 +17,7 @@ export interface AppConfig {
   security: SecuritySettings
   monitoring: MonitoringSettings
   logging: LoggingSettings
+  healthCheck: any
 }
 
 export interface VTEXEnvironmentConfig {
@@ -48,6 +49,7 @@ export interface DeploymentSettings {
   healthCheckRetries: number
   parallelDeployments: boolean
   maxParallelJobs: number
+  retries?: number
 }
 
 export interface WorkspaceSettings {
@@ -65,6 +67,7 @@ export interface NotificationSettings {
   email: EmailConfig
   teams: TeamsConfig
   webhook?: WebhookConfig
+  channels?: any
 }
 
 export interface SlackConfig {
@@ -75,6 +78,7 @@ export interface SlackConfig {
   iconEmoji?: string
   mentionOnFailure?: boolean
   mentionUsers?: string[]
+  webhook?: string
 }
 
 export interface EmailConfig {

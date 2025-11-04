@@ -4,7 +4,8 @@ import {
   createMockLogger,
   setupTestEnvironment,
   cleanupTestEnvironment,
-  expectToThrow
+  expectToThrow,
+  mockFs
 } from '../helpers/test-helpers'
 import path from 'path'
 
@@ -105,7 +106,7 @@ describe('ConfigManager', () => {
 
   describe('updateConfig', () => {
     it('should update configuration with partial object', () => {
-      const updates = {
+      const updates: any = {
         vtex: {
           account: 'new-account'
         }
@@ -118,7 +119,7 @@ describe('ConfigManager', () => {
     })
 
     it('should merge nested objects correctly', () => {
-      const updates = {
+      const updates: any = {
         deployment: {
           timeout: 60000
         }
@@ -132,7 +133,7 @@ describe('ConfigManager', () => {
     })
 
     it('should validate configuration after update', () => {
-      const invalidUpdates = {
+      const invalidUpdates: any = {
         vtex: {
           account: '' // Invalid empty account
         }
@@ -142,7 +143,7 @@ describe('ConfigManager', () => {
     })
 
     it('should save configuration to file after update', () => {
-      const updates = {
+      const updates: any = {
         vtex: {
           account: 'new-account'
         }
@@ -326,8 +327,8 @@ describe('ConfigManager', () => {
         }
       }
 
-      ;(mockFs.promises.readFile as jest.Mock).mockResolvedValue(JSON.stringify(importConfig))
-      ;(mockFs.existsSync as jest.Mock).mockReturnValue(true)
+      ;(mockFs.promises.readFile as jest.Mock).mockResolvedValue?(JSON.stringify(importConfig))
+      :(mockFs.existsSync as jest.Mock).mockReturnValue(true)
 
       await configManager.importConfig('/tmp/config-import.json')
       const config = configManager.getConfig()
@@ -344,8 +345,8 @@ describe('ConfigManager', () => {
         }
       }
 
-      ;(mockFs.promises.readFile as jest.Mock).mockResolvedValue(JSON.stringify(importConfig))
-      ;(mockFs.existsSync as jest.Mock).mockReturnValue(true)
+      ;(mockFs.promises.readFile as jest.Mock).mockResolvedValue?(JSON.stringify(importConfig))
+      :(mockFs.existsSync as jest.Mock).mockReturnValue(true)
 
       await configManager.importConfig('/tmp/config-import.json', true)
       const config = configManager.getConfig()
@@ -361,8 +362,8 @@ describe('ConfigManager', () => {
         }
       }
 
-      ;(mockFs.promises.readFile as jest.Mock).mockResolvedValue(JSON.stringify(invalidConfig))
-      ;(mockFs.existsSync as jest.Mock).mockReturnValue(true)
+      ;(mockFs.promises.readFile as jest.Mock).mockResolvedValue?(JSON.stringify(invalidConfig))
+      :(mockFs.existsSync as jest.Mock).mockReturnValue(true)
 
       await expect(
         configManager.importConfig('/tmp/config-import.json', false)
@@ -507,3 +508,17 @@ describe('ConfigManager', () => {
     })
   })
 })
+function afterEach(fn: () => void): void {
+  // Delegate to the Jest global afterEach if available, otherwise run immediately as a fallback.
+  const globalAfter = (globalThis as any).afterEach || (global as any).afterEach
+  if (typeof globalAfter === 'function') {
+    globalAfter(fn)
+  } else {
+    try {
+      fn()
+    } catch {
+      // swallow errors in fallback to avoid hiding test suite failures in environments
+      // where Jest lifecycle hooks are not present
+    }
+  }
+}

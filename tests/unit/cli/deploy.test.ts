@@ -11,7 +11,7 @@ import {
   createMockDeploymentResult,
   mockAsyncFunction,
   mockRejectedFunction,
-} from '@tests/setup'
+} from '@tests/test-utils'
 
 // Mock dependencies
 jest.mock('@/core/DeployManager')
